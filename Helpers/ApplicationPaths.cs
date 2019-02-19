@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace CK2ModTests.Helpers
@@ -7,6 +9,7 @@ namespace CK2ModTests.Helpers
     public sealed class ApplicationPaths
     {
         static string rootDirectory;
+        static IList<string> mods;
 
         /// <summary>
         /// The executing directory.
@@ -26,13 +29,36 @@ namespace CK2ModTests.Helpers
             }
         }
 
-        public static string TestsDirectory => Path.Combine(RootDirectory, "tests");
+        public static IEnumerable<string> Mods
+        {
+            get
+            {
+                if (mods == null)
+                {
+                    IEnumerable<string> rootFiles = Directory.GetFiles(RootDirectory);
+                    mods = new List<string>();
+
+                    foreach (string file in rootFiles)
+                    {
+                        if (file.EndsWith(".mod"))
+                        {
+                            string mod = Path.GetFileNameWithoutExtension(file);
+                            mods.Add(mod);
+                        }
+                    }
+                }
+
+                return mods;
+            }
+        }
+
+        public static string TestsDirectory => Path.Combine(RootDirectory, "ck2-mod-tests");
 
         public static string TestDataDirectory => Path.Combine(TestsDirectory, "Data");
 
-        public static string DescriptorFile => Path.Combine(RootDirectory, "ek-more-cultural-names.mod");
+        public static string DescriptorFile => Path.Combine(RootDirectory, $"{Mods.First()}.mod");
 
-        public static string ModDirectory => Path.Combine(RootDirectory, "ek-more-cultural-names");
+        public static string ModDirectory => Path.Combine(RootDirectory, Mods.First());
 
         public static string CommonDirectory => Path.Combine(ModDirectory, "common");
         
