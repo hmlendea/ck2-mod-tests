@@ -17,7 +17,7 @@ namespace CK2ModTests.Tests
     [TestClass]
     public class ContentIntegrityTests
     {
-        const string InvalidQuotesPattern = "(^ *[^_]* = \"[^\"]*$|^ *[^_]* = [^\"]*\"$)";
+        const string InvalidQuotesPattern = "(^ *[^_]* = \"[^\"]*$|^ *[^_]* = \"\"[^\"]*|^ *[^_]* = [^\"]*\"$|^ *[^_]* = [^\"]*\"\")";
         const string InvalidSpacingPattern = @"(^.*\ \ .*$|^\ .*$|^.*\ $)";
         const string MissingEquaitySignPattern = "^ *[a-z]* +\"[A-Za-z]*\"$";
 
