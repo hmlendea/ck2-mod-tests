@@ -7,10 +7,11 @@ using System.Text.RegularExpressions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using CK2ModTests.Entities;
+using CK2ModTests.DataAccess.IO;
+using CK2ModTests.DomainModels;
 using CK2ModTests.Extensions;
 using CK2ModTests.Helpers;
-using CK2ModTests.IO;
+using CK2ModTests.Mapping;
 
 namespace CK2ModTests.Tests
 {
@@ -153,9 +154,9 @@ namespace CK2ModTests.Tests
                 List<string> lines = FileProvider.ReadAllLines(FileEncoding.Windows1252, file).ToList();
                 List<string> fullLines = FileProvider.ReadAllLines(FileEncoding.Windows1252, file, true).ToList();
 
-                List<LandedTitle> landedTitles = LandedTitlesFile
+                IEnumerable<LandedTitle> landedTitles = LandedTitlesFile
                     .ReadAllTitles(file)
-                    .ToList();
+                    .ToDomainModels();
                 
                 AssertIndentation(lines, file);
                 AssertTrailingWhitespaces(fullLines, file);

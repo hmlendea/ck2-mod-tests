@@ -4,7 +4,7 @@ using System.Linq;
 
 using CK2ModTests.Helpers;
 
-namespace CK2ModTests.Entities
+namespace CK2ModTests.DomainModels
 {
     public class ModDescriptor
     {

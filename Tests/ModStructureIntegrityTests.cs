@@ -6,7 +6,7 @@ using System.Text;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using CK2ModTests.Entities;
+using CK2ModTests.DomainModels;
 using CK2ModTests.Extensions;
 using CK2ModTests.Helpers;
 
