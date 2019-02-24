@@ -25,7 +25,7 @@ namespace CK2ModTests.DomainModels
 
         public string SecondaryEventPictures { get; set; }
 
-        public Color Colour { get; set; }
+        public Color? Colour { get; set; }
 
         public IList<string> MaleNames { get; set; }
 

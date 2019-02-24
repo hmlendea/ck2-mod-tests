@@ -76,8 +76,18 @@ namespace CK2ModTests.Mapping
             return domainModels;
         }
 
-        private static Color GetColorFromIntArray(int[] rgb)
+        private static Color? GetColorFromIntArray(int[] rgb)
         {
+            if (rgb == null)
+            {
+                return null;
+            }
+
+            if (rgb.Length != 3)
+            {
+                throw new ArgumentException($"Invalid RGB array length ({rgb.Length}, must be 3)");
+            }
+
             int r = Math.Min(Math.Max(0, rgb[0]), 255);
             int g = Math.Min(Math.Max(0, rgb[1]), 255);
             int b = Math.Min(Math.Max(0, rgb[2]), 255);
