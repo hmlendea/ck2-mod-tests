@@ -9,60 +9,60 @@ using CK2ModTests.DomainModels;
 namespace CK2ModTests.Mapping
 {
     /// <summary>
-    /// LandedTitle mapping extensions for converting between entities and domain models.
+    /// Extensions for mapping between a <see cref="LandedTitleEntity"/> data object and a <see cref="LandedTitle"/> domain model.
     /// </summary>
-    static class LandedTitleMappingExtensions
+    static class LandedTitleMappings
     {
         /// <summary>
-        /// Converts the entity into a domain model.
+        /// Converts a <see cref="LandedTitleEntity"/> data object into a <see cref="LandedTitle"/> domain model.
         /// </summary>
-        /// <returns>The domain model.</returns>
-        /// <param name="landedTitleEntity">LandedTitle entity.</param>
-        internal static LandedTitle ToDomainModel(this LandedTitleEntity landedTitleEntity)
+        /// <returns>The <see cref="LandedTitle"/> domain model.</returns>
+        /// <param name="dataObject">The <see cref="LandedTitleEntity"/> data object.</param>
+        internal static LandedTitle ToDomainModel(this LandedTitleEntity dataObject)
         {
-            LandedTitle landedTitle = new LandedTitle
+            LandedTitle domainModel = new LandedTitle
             {
-                Id = landedTitleEntity.Id,
-                ParentId = landedTitleEntity.ParentId,
+                Id = dataObject.Id,
+                ParentId = dataObject.ParentId,
                 //Children = landedTitleEntity.Children.ToDomainModels().ToList(),
-                FemaleNames = landedTitleEntity.FemaleNames,
-                MaleNames = landedTitleEntity.MaleNames,
-                HolySites = landedTitleEntity.HolySites,
-                DynamicNames = landedTitleEntity.DynamicNames.ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
-                PrimaryColour = GetColorFromIntArray(landedTitleEntity.PrimaryColour),
-                SecondaryColour = GetColorFromIntArray(landedTitleEntity.SecondaryColour),
-                ControlledReligionId = landedTitleEntity.ControlledReligionId,
-                CultureId = landedTitleEntity.CultureId,
-                GraphicalCulture = landedTitleEntity.GraphicalCulture,
-                MercenaryType = landedTitleEntity.MercenaryType,
-                ReligionId = landedTitleEntity.ReligionId,
-                TitleFormOfAddress = landedTitleEntity.TitleFormOfAddress,
-                TitleLocalisationId = landedTitleEntity.TitleLocalisationId,
-                TitleLocalisationFemaleId = landedTitleEntity.TitleLocalisationFemaleId,
-                TitleLocalisationPrefixId = landedTitleEntity.TitleLocalisationPrefixId,
-                TitleNameTierId = landedTitleEntity.TitleNameTierId,
-                AllowsAssimilation = landedTitleEntity.AllowsAssimilation,
-                CreationRequiresCapital = landedTitleEntity.CreationRequiresCapital,
-                TitleContainsCapital = landedTitleEntity.TitleContainsCapital,
-                HasPurpleBornHeirs = landedTitleEntity.HasPurpleBornHeirs,
-                HasTopDeJureCapital = landedTitleEntity.HasTopDeJureCapital,
-                IsCaliphate = landedTitleEntity.IsCaliphate,
-                IsHolyOrder = landedTitleEntity.IsHolyOrder,
-                IsIndependent = landedTitleEntity.IsIndependent,
-                IsLandless = landedTitleEntity.IsLandless,
-                IsMercenaryGroup = landedTitleEntity.IsMercenaryGroup,
-                IsPirate = landedTitleEntity.IsPirate,
-                IsPrimaryTitle = landedTitleEntity.IsPrimaryTitle,
-                IsTribe = landedTitleEntity.IsTribe,
-                UseDynastyTitleNames = landedTitleEntity.UseDynastyTitleNames,
-                UseShortName = landedTitleEntity.UseShortName,
-                StrengthGrowthPerCentury = landedTitleEntity.StrengthGrowthPerCentury,
-                CapitalId = landedTitleEntity.CapitalId,
-                Dignity = landedTitleEntity.Dignity,
-                MonthlyIncome = landedTitleEntity.MonthlyIncome
+                FemaleNames = dataObject.FemaleNames,
+                MaleNames = dataObject.MaleNames,
+                HolySites = dataObject.HolySites,
+                DynamicNames = dataObject.DynamicNames.ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
+                PrimaryColour = GetColorFromIntArray(dataObject.PrimaryColour),
+                SecondaryColour = GetColorFromIntArray(dataObject.SecondaryColour),
+                ControlledReligionId = dataObject.ControlledReligionId,
+                CultureId = dataObject.CultureId,
+                GraphicalCulture = dataObject.GraphicalCulture,
+                MercenaryType = dataObject.MercenaryType,
+                ReligionId = dataObject.ReligionId,
+                TitleFormOfAddress = dataObject.TitleFormOfAddress,
+                TitleLocalisationId = dataObject.TitleLocalisationId,
+                TitleLocalisationFemaleId = dataObject.TitleLocalisationFemaleId,
+                TitleLocalisationPrefixId = dataObject.TitleLocalisationPrefixId,
+                TitleNameTierId = dataObject.TitleNameTierId,
+                AllowsAssimilation = dataObject.AllowsAssimilation,
+                CreationRequiresCapital = dataObject.CreationRequiresCapital,
+                TitleContainsCapital = dataObject.TitleContainsCapital,
+                HasPurpleBornHeirs = dataObject.HasPurpleBornHeirs,
+                HasTopDeJureCapital = dataObject.HasTopDeJureCapital,
+                IsCaliphate = dataObject.IsCaliphate,
+                IsHolyOrder = dataObject.IsHolyOrder,
+                IsIndependent = dataObject.IsIndependent,
+                IsLandless = dataObject.IsLandless,
+                IsMercenaryGroup = dataObject.IsMercenaryGroup,
+                IsPirate = dataObject.IsPirate,
+                IsPrimaryTitle = dataObject.IsPrimaryTitle,
+                IsTribe = dataObject.IsTribe,
+                UseDynastyTitleNames = dataObject.UseDynastyTitleNames,
+                UseShortName = dataObject.UseShortName,
+                StrengthGrowthPerCentury = dataObject.StrengthGrowthPerCentury,
+                CapitalId = dataObject.CapitalId,
+                Dignity = dataObject.Dignity,
+                MonthlyIncome = dataObject.MonthlyIncome
             };
 
-            return landedTitle;
+            return domainModel;
         }
 
         internal static IEnumerable<LandedTitle> ToDomainModelsRecursively(this LandedTitleEntity landedTitleEntity)

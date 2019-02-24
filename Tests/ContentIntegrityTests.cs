@@ -29,6 +29,33 @@ namespace CK2ModTests.Tests
         }
 
         [TestMethod]
+        public void TestCultureFilesIntegrity()
+        {
+            List<string> files = FileProvider.GetFilesInDirectory(ApplicationPaths.CulturesDirectory).ToList();
+
+            foreach (string file in files)
+            {
+                string fileName = PathExt.GetFileNameWithoutRootDirectory(file);
+
+                List<string> lines = FileProvider
+                    .ReadAllLines(FileEncoding.Windows1252, file)
+                    .ToList();
+
+                IEnumerable<Culture> cultures = CultureFile
+                    .ReadAllCultures(file)
+                    .ToDomainModels();
+
+                string content = string.Join(Environment.NewLine, lines);
+
+                int openingBrackets = content.Count(x => x == '{');
+                int closingBrackets = content.Count(x => x == '}');
+
+                Assert.AreEqual(openingBrackets, closingBrackets, $"There are mismatching brackets in {fileName}");
+                AssertCultureChanceValues(cultures, file);
+            }
+        }
+
+        [TestMethod]
         public void TestLandedTitleFilesIntegrity()
         {
             List<string> files = FileProvider.GetFilesInDirectory(ApplicationPaths.LandedTitlesDirectory).ToList();
@@ -87,6 +114,31 @@ namespace CK2ModTests.Tests
                     Assert.IsFalse(string.IsNullOrWhiteSpace(fields[3]), $"German localisation is undefined in {fileName} at line {lineNumber}");
                     Assert.IsFalse(string.IsNullOrWhiteSpace(fields[5]), $"Spanish localisation is undefined in {fileName} at line {lineNumber}");
                 }
+            }
+        }
+
+        void AssertCultureChanceValues(IEnumerable<Culture> cultures, string file)
+        {
+            string fileName = PathExt.GetFileNameWithoutRootDirectory(file);
+
+            foreach (Culture culture in cultures)
+            {
+                Assert.AreEqual(
+                    1, cultures.Count(x => x.Id == culture.Id),
+                    $"The '{fileName}' file contains a duplicated culture '{culture.Id}'");
+
+                int maleNameInheritanceChance =
+                    culture.PatrilinealGrandfatherNameChance +
+                    culture.MatrilinealGrandfatherNameChance +
+                    culture.FatherNameChance;
+                
+                int femaleNameInheritanceChance =
+                    culture.PatrilinealGrandmotherNameChance +
+                    culture.MatrilinealGrandmotherNameChance +
+                    culture.MotherNameChance;
+                
+                Assert.IsTrue(maleNameInheritanceChance <= 100, $"The '{culture.Id}' culture's total name inheritance chance for males cannot exceed 100");
+                Assert.IsTrue(femaleNameInheritanceChance <= 100, $"The '{culture.Id}' culture's total name inheritance chance for females cannot exceed 100");
             }
         }
 

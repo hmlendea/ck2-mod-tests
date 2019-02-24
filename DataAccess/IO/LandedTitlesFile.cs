@@ -21,7 +21,7 @@ namespace CK2ModTests.DataAccess.IO
         public void TokenCallback(ParadoxParser parser, string token)
         {
             LandedTitleDefinition landedTitle = new LandedTitleDefinition();
-            landedTitle.LandedTitleEntity.Id = token;
+            landedTitle.Entity.Id = token;
 
             LandedTitles.Add(parser.Parse(landedTitle));
         }
@@ -30,7 +30,7 @@ namespace CK2ModTests.DataAccess.IO
         {
             foreach (LandedTitleDefinition landedTitle in LandedTitles)
             {
-                writer.Write(landedTitle.LandedTitleEntity.Id, landedTitle);
+                writer.Write(landedTitle.Entity.Id, landedTitle);
             }
         }
 
@@ -42,14 +42,14 @@ namespace CK2ModTests.DataAccess.IO
                 landedTitlesFile = ParadoxParser.Parse(fs, new LandedTitlesFile());
             }
             
-            return landedTitlesFile.LandedTitles.Select(x => x.LandedTitleEntity);
+            return landedTitlesFile.LandedTitles.Select(x => x.Entity);
         }
 
         public static void WriteAllTitles(string fileName, IEnumerable<LandedTitleEntity> landedTitles)
         {
             LandedTitlesFile landedTitlesFile = new LandedTitlesFile
             {
-                LandedTitles = landedTitles.Select(x => new LandedTitleDefinition { LandedTitleEntity = x }).ToList()
+                LandedTitles = landedTitles.Select(x => new LandedTitleDefinition { Entity = x }).ToList()
             };
 
             using (FileStream fs = new FileStream(fileName, FileMode.Create))

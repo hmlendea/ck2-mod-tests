@@ -10,11 +10,11 @@ namespace CK2ModTests.DataAccess.IO
 {
     public sealed class LandedTitleDefinition : IParadoxRead, IParadoxWrite
     {
-        public LandedTitleEntity LandedTitleEntity { get; set; }
+        public LandedTitleEntity Entity { get; set; }
 
         public LandedTitleDefinition()
         {
-            LandedTitleEntity = new LandedTitleEntity();
+            Entity = new LandedTitleEntity();
         }
         
         public void TokenCallback(ParadoxParser parser, string token)
@@ -22,10 +22,10 @@ namespace CK2ModTests.DataAccess.IO
             if (token[1] == '_') // Like e_something or c_something
             {
                 LandedTitleDefinition landedTitle = new LandedTitleDefinition();
-                landedTitle.LandedTitleEntity.ParentId = LandedTitleEntity.Id;
-                landedTitle.LandedTitleEntity.Id = token;
+                landedTitle.Entity.ParentId = Entity.Id;
+                landedTitle.Entity.Id = token;
 
-                LandedTitleEntity.Children.Add(parser.Parse(landedTitle).LandedTitleEntity);
+                Entity.Children.Add(parser.Parse(landedTitle).Entity);
                 return;
             }
 
@@ -40,139 +40,139 @@ namespace CK2ModTests.DataAccess.IO
                     break;
 
                 case "assimilate":
-                    LandedTitleEntity.AllowsAssimilation = parser.ReadBool();
+                    Entity.AllowsAssimilation = parser.ReadBool();
                     break;
 
                 case "color":
-                    LandedTitleEntity.PrimaryColour = parser.ReadIntList().ToArray();
+                    Entity.PrimaryColour = parser.ReadIntList().ToArray();
                     break;
 
                 case "color2":
-                    LandedTitleEntity.SecondaryColour = parser.ReadIntList().ToArray();
+                    Entity.SecondaryColour = parser.ReadIntList().ToArray();
                     break;
 
                 case "caliphate":
-                    LandedTitleEntity.IsCaliphate = parser.ReadBool();
+                    Entity.IsCaliphate = parser.ReadBool();
                     break;
 
                 case "capital":
-                    LandedTitleEntity.CapitalId = parser.ReadInt32();
+                    Entity.CapitalId = parser.ReadInt32();
                     break;
 
                 case "controls_religion":
-                    LandedTitleEntity.ControlledReligionId = parser.ReadString();
+                    Entity.ControlledReligionId = parser.ReadString();
                     break;
 
                 case "creation_requires_capital":
-                    LandedTitleEntity.CreationRequiresCapital = parser.ReadBool();
+                    Entity.CreationRequiresCapital = parser.ReadBool();
                     break;
 
                 case "culture":
-                    LandedTitleEntity.CultureId = parser.ReadString();
+                    Entity.CultureId = parser.ReadString();
                     break;
 
                 case "dignity":
-                    LandedTitleEntity.Dignity = parser.ReadInt32();
+                    Entity.Dignity = parser.ReadInt32();
                     break;
 
                 case "dynasty_title_names":
-                    LandedTitleEntity.UseDynastyTitleNames = parser.ReadBool();
+                    Entity.UseDynastyTitleNames = parser.ReadBool();
                     break;
 
                 case "female_names":
-                    LandedTitleEntity.FemaleNames = parser.ReadStringList();
+                    Entity.FemaleNames = parser.ReadStringList();
                     break;
 
                 case "foa":
-                    LandedTitleEntity.TitleFormOfAddress = parser.ReadString();
+                    Entity.TitleFormOfAddress = parser.ReadString();
                     break;
 
                 case "graphical_culture":
-                    LandedTitleEntity.GraphicalCulture = parser.ReadString();
+                    Entity.GraphicalCulture = parser.ReadString();
                     break;
                     
                 case "has_top_de_jure_capital":
-                    LandedTitleEntity.HasTopDeJureCapital = parser.ReadBool();
+                    Entity.HasTopDeJureCapital = parser.ReadBool();
                     break;
 
                 case "holy_order":
-                    LandedTitleEntity.IsHolyOrder = parser.ReadBool();
+                    Entity.IsHolyOrder = parser.ReadBool();
                     break;
 
                 case "holy_site":
-                    LandedTitleEntity.HolySites.Add(parser.ReadString());
+                    Entity.HolySites.Add(parser.ReadString());
                     break;
 
                 case "independent":
-                    LandedTitleEntity.IsIndependent = parser.ReadBool();
+                    Entity.IsIndependent = parser.ReadBool();
                     break;
 
                 case "landless":
-                    LandedTitleEntity.IsLandless = parser.ReadBool();
+                    Entity.IsLandless = parser.ReadBool();
                     break;
 
                 case "location_ruler_title":
-                    LandedTitleEntity.TitleContainsCapital = parser.ReadBool();
+                    Entity.TitleContainsCapital = parser.ReadBool();
                     break;
 
                 case "male_names":
-                    LandedTitleEntity.MaleNames = parser.ReadStringList();
+                    Entity.MaleNames = parser.ReadStringList();
                     break;
 
                 case "mercenary":
-                    LandedTitleEntity.IsMercenaryGroup = parser.ReadBool();
+                    Entity.IsMercenaryGroup = parser.ReadBool();
                     break;
 
                 case "mercenary_type":
-                    LandedTitleEntity.MercenaryType = parser.ReadString();
+                    Entity.MercenaryType = parser.ReadString();
                     break;
 
                 case "monthly_income":
-                    LandedTitleEntity.MonthlyIncome = parser.ReadInt32();
+                    Entity.MonthlyIncome = parser.ReadInt32();
                     break;
 
                 case "name_tier":
-                    LandedTitleEntity.TitleNameTierId = parser.ReadString();
+                    Entity.TitleNameTierId = parser.ReadString();
                     break;
 
                 case "pirate":
-                    LandedTitleEntity.IsPirate = parser.ReadBool();
+                    Entity.IsPirate = parser.ReadBool();
                     break;
 
                 case "primary":
-                    LandedTitleEntity.IsPrimaryTitle = parser.ReadBool();
+                    Entity.IsPrimaryTitle = parser.ReadBool();
                     break;
 
                 case "purple_born_heirs":
-                    LandedTitleEntity.HasPurpleBornHeirs = parser.ReadBool();
+                    Entity.HasPurpleBornHeirs = parser.ReadBool();
                     break;
 
                 case "religion":
-                    LandedTitleEntity.ReligionId = parser.ReadString();
+                    Entity.ReligionId = parser.ReadString();
                     break;
 
                 case "short_name":
-                    LandedTitleEntity.UseShortName = parser.ReadBool();
+                    Entity.UseShortName = parser.ReadBool();
                     break;
 
                 case "strength_growth_per_century":
-                    LandedTitleEntity.StrengthGrowthPerCentury = parser.ReadFloat();
+                    Entity.StrengthGrowthPerCentury = parser.ReadFloat();
                     break;
 
                 case "title":
-                    LandedTitleEntity.TitleLocalisationId = parser.ReadString();
+                    Entity.TitleLocalisationId = parser.ReadString();
                     break;
 
                 case "title_female":
-                    LandedTitleEntity.TitleLocalisationFemaleId = parser.ReadString();
+                    Entity.TitleLocalisationFemaleId = parser.ReadString();
                     break;
 
                 case "title_prefix":
-                    LandedTitleEntity.TitleLocalisationPrefixId = parser.ReadString();
+                    Entity.TitleLocalisationPrefixId = parser.ReadString();
                     break;
 
                 case "tribe":
-                    LandedTitleEntity.IsTribe = parser.ReadBool();
+                    Entity.IsTribe = parser.ReadBool();
                     break;
 
                 default:
@@ -181,11 +181,11 @@ namespace CK2ModTests.DataAccess.IO
 
                     if (int.TryParse(stringValue, out intValue))
                     {
-                        LandedTitleEntity.ReligiousValues.AddOrUpdate(token, intValue);
+                        Entity.ReligiousValues.AddOrUpdate(token, intValue);
                     }
                     else
                     {
-                        LandedTitleEntity.DynamicNames.AddOrUpdate(token, stringValue);
+                        Entity.DynamicNames.AddOrUpdate(token, stringValue);
                     }
 
                     break;
@@ -194,18 +194,18 @@ namespace CK2ModTests.DataAccess.IO
         
         public void Write(ParadoxStreamWriter writer)
         {
-            List<KeyValuePair<string, string>> sortedDynamicNames = LandedTitleEntity.DynamicNames.ToList().OrderBy(x => x.Key).ToList();
+            List<KeyValuePair<string, string>> sortedDynamicNames = Entity.DynamicNames.ToList().OrderBy(x => x.Key).ToList();
 
             foreach(var dynamicName in sortedDynamicNames)
             {
                 writer.WriteLine(dynamicName.Key, dynamicName.Value, ValueWrite.Quoted);
             }
 
-            foreach (LandedTitleEntity landedTitle in LandedTitleEntity.Children)
+            foreach (LandedTitleEntity landedTitle in Entity.Children)
             {
                 LandedTitleDefinition landedTitleDefinition = new LandedTitleDefinition
                 {
-                    LandedTitleEntity = landedTitle
+                    Entity = landedTitle
                 };
 
                 writer.Write(landedTitle.Id, landedTitleDefinition);
