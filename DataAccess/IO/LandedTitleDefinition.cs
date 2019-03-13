@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using NuciExtensions;
 using Pdoxcl2Sharp;
 
 using CK2ModTests.DataAccess.DataObjects;
